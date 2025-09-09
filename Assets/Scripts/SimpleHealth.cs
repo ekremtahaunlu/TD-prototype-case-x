@@ -7,13 +7,23 @@ public class SimpleHealth : MonoBehaviour
     public float hp;
     public bool invincible = false;
     public float iFrameDuration = 0.5f;
-
+    public AudioClip deathSound;
+    public ParticleSystem deathVFX;
+    private AudioSource audioSource;
     private Renderer rend;
 
     void Start()
     {
         hp = maxHP;
         rend = GetComponentInChildren<Renderer>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    void Die()
+    {
+        if (deathSound != null) audioSource.PlayOneShot(deathSound);
+        if (deathVFX != null) Instantiate(deathVFX, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public void TakeDamage(float amount)
