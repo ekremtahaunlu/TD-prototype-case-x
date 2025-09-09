@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWave = 0;
     private bool running = false;
+    public int CurrentWave => currentWave;
 
     void Start()
     {
