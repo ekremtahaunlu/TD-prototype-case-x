@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public AudioClip attackSound;
+public ParticleSystem attackVFX;
+private AudioSource audioSource;
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -80,7 +85,8 @@ public class PlayerController : MonoBehaviour
         {
             health.TakeDamage(attackDamage);
         }
-        // TODO: VFX / ses burada tetiklenebilir
+        if (attackSound != null) audioSource.PlayOneShot(attackSound);
+        if (attackVFX != null) Instantiate(attackVFX, target.position, Quaternion.identity);
     }
 
     void OnDrawGizmosSelected()
