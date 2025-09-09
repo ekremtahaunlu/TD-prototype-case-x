@@ -53,10 +53,4 @@ public class SimpleHealth : MonoBehaviour
         if (rend != null) rend.enabled = true;
         invincible = false;
     }
-
-    void Die()
-    {
-        // VFX / ses ekleyin
-        Destroy(gameObject);
-    }
 }

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public AudioClip attackSound;
-public ParticleSystem attackVFX;
-private AudioSource audioSource;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip attackSound;
+    public ParticleSystem attackVFX;
+    private AudioSource audioSource;
     public float moveSpeed = 5f;
     public float attackRange = 3f;
     public float attackCooldown = 0.5f;

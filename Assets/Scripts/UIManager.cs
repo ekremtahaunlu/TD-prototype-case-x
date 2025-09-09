@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private WaveManager waveManager;
+    private SimpleHealth playerHealth;
     public Text waveText;
     public Text enemyCountText;
     public Slider playerHealthSlider;
-    private WaveManager waveManager;
-    private SimpleHealth playerHealth;
-
     void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
