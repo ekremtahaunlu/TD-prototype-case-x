@@ -1,18 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class SimpleHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float maxHP = 100f;
+    public float hp;
+    public bool invincible = false;
+    public float iFrameDuration = 0.5f;
+
+    private Renderer rend;
+
     void Start()
     {
-        
+        hp = maxHP;
+        rend = GetComponentInChildren<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float amount)
     {
-        
+        if (invincible) return;
+        hp -= amount;
+        if (hp <= 0f)
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine(IFrameFlash());
+        }
+    }
+
+    IEnumerator IFrameFlash()
+    {
+        invincible = true;
+        float elapsed = 0f;
+        while (elapsed < iFrameDuration)
+        {
+            if (rend != null) rend.enabled = !rend.enabled;
+            elapsed += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        if (rend != null) rend.enabled = true;
+        invincible = false;
+    }
+
+    void Die()
+    {
+        // VFX / ses ekleyin
+        Destroy(gameObject);
     }
 }
