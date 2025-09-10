@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6779077766675992066}
   - component: {fileID: 2823793025626628980}
   - component: {fileID: 5594592420561183490}
-  - component: {fileID: 9036319238434548547}
   - component: {fileID: 66167608217750890}
+  - component: {fileID: 9036319238434548547}
   - component: {fileID: -1745729855911291311}
   m_Layer: 3
   m_Name: Enemy
@@ -109,20 +109,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &9036319238434548547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265087050904634348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe6a0ed27efd1b4ba94f58816bfa44a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  hitEffectPrefab: {fileID: 6525995698073518272, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}
 --- !u!82 &66167608217750890
 AudioSource:
   m_ObjectHideFlags: 0
@@ -219,6 +205,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9036319238434548547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265087050904634348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe6a0ed27efd1b4ba94f58816bfa44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 5
 --- !u!114 &-1745729855911291311
 MonoBehaviour:
   m_ObjectHideFlags: 0

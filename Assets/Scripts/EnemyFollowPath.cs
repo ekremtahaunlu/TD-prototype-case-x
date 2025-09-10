@@ -28,12 +28,11 @@ public class EnemyFollowPath : MonoBehaviour
 
     void ReachDestination()
     {
-        SimpleHealth baseHealth = FindObjectOfType<SimpleHealth>();
+        SimpleHealth baseHealth = GameObject.FindWithTag("Base")?.GetComponent<SimpleHealth>();
         if (baseHealth != null)
         {
             baseHealth.TakeDamage(1);
         }
-
         Destroy(gameObject);
     }
 }

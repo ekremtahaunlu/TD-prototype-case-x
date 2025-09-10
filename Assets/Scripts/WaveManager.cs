@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wave
 {
     public GameObject enemyPrefab;
-    public int count = 10;
+    public int count = 5;
     public float spawnInterval = 0.5f;
 }
 
@@ -43,7 +43,6 @@ public class WaveManager : MonoBehaviour
             }
 
             currentWave++;
-            yield return null;
         }
     }
 

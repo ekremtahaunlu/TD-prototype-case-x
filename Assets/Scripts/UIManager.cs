@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    private SimpleHealth baseHealth;
+    public SimpleHealth baseHealth;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;

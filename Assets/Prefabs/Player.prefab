@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6844772068368832674}
   - component: {fileID: 7590105705530571905}
   - component: {fileID: 7169932531082401212}
-  - component: {fileID: 7529906552340158247}
   - component: {fileID: 7419306707013610820}
   - component: {fileID: 8794780807720703687}
   m_Layer: 0
@@ -138,27 +137,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7529906552340158247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2172043183678646641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d920f8f88cd60284abebc79821e5500f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackSound: {fileID: 8300000, guid: 3826643cdb1585c418ec4272aa876efa, type: 3}
-  attackVFX: {fileID: 6232553208862031952, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}
-  moveSpeed: 8
-  attackRange: 1.5
-  attackCooldown: 0.5
-  attackDamage: 4
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &7419306707013610820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,8 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe6a0ed27efd1b4ba94f58816bfa44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  hitEffectPrefab: {fileID: 6525995698073518272, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}
+  maxHP: 0
 --- !u!82 &8794780807720703687
 AudioSource:
   m_ObjectHideFlags: 0
