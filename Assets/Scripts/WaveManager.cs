@@ -14,7 +14,7 @@ public class WaveManager : MonoBehaviour
     public Wave[] waves;
     public Transform spawnPoint;
     public Transform[] pathWaypoints;
-    public KeyCode earlyNextWaveKey = KeyCode.E; // ekstra: erken çağırma tuşu
+    public KeyCode earlyNextWaveKey = KeyCode.E;
 
     private int currentWave = 0;
     private bool running = false;
@@ -37,7 +37,6 @@ public class WaveManager : MonoBehaviour
                 yield return new WaitForSeconds(w.spawnInterval);
             }
 
-            // Dalga spawn'ı bitti. Sonraki dalgayı bekle (düşman kalmayana kadar) veya erken tuşuna basılmasını bekle.
             while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 if (Input.GetKeyDown(earlyNextWaveKey)) break;
@@ -48,8 +47,6 @@ public class WaveManager : MonoBehaviour
             running = false;
             yield return null;
         }
-
-        // Tüm dalgalar bitti — burada win condition ekleyebilirsiniz.
     }
 
     void SpawnEnemy(GameObject prefab)
@@ -57,6 +54,5 @@ public class WaveManager : MonoBehaviour
         var go = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         var ef = go.GetComponent<EnemyFollowPath>();
         if (ef != null) ef.waypoints = pathWaypoints;
-        // Enemy prefab'ına Tag = "Enemy" atamayı unutmayın
     }
 }

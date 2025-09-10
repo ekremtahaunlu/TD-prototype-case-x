@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6779077766675992066}
   - component: {fileID: 2823793025626628980}
   - component: {fileID: 5594592420561183490}
-  - component: {fileID: 2217476447461824147}
   - component: {fileID: 9036319238434548547}
+  - component: {fileID: 1574013889202572878}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -108,20 +108,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2217476447461824147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265087050904634348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6131516e4e0334189be88a59389ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  speed: 2
 --- !u!114 &9036319238434548547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +122,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   hitEffectPrefab: {fileID: 6525995698073518272, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}
+--- !u!114 &1574013889202572878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265087050904634348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f27fc80dd85bf4aad634be7479e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  attackRange: 1.5
+  damage: 1
+  attackCooldown: 1
