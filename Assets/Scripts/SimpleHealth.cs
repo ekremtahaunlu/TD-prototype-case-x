@@ -2,33 +2,26 @@
 
 public class SimpleHealth : MonoBehaviour
 {
-    public int maxHealth = 5;
-    public int CurrentHealth { get; private set; }
-
-    public GameObject hitEffectPrefab;
+    public int maxHP = 20;
+    public int hp;
 
     void Start()
     {
-        CurrentHealth = maxHealth;
+        hp = maxHP;
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
-        CurrentHealth -= Mathf.RoundToInt(amount);
-
-        if (hitEffectPrefab != null)
+        hp -= amount;
+        if (hp <= 0)
         {
-            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-        }
-
-        if (CurrentHealth <= 0)
-        {
+            hp = 0;
             Die();
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("Base destroyed! Game Over!");
     }
 }

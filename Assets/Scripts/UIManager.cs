@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,35 +6,29 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    private SimpleHealth playerHealth;
+    private SimpleHealth baseHealth;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
-    public Slider playerHealthSlider;
+    public Slider baseHealthSlider;
 
     void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
-        playerHealth = FindObjectOfType<PlayerController>().GetComponent<SimpleHealth>();
-
-        if (playerHealthSlider != null && playerHealth != null)
-        {
-            playerHealthSlider.maxValue = playerHealth.maxHealth;
-            playerHealthSlider.value = playerHealth.maxHealth;
-        }
+        baseHealth = FindObjectOfType<SimpleHealth>();
     }
 
     void Update()
     {
-        if (waveManager != null && waveText != null && enemyCountText != null)
+        if (waveManager != null)
         {
             waveText.text = "Wave: " + (waveManager.CurrentWave + 1);
             enemyCountText.text = "Enemies: " + GameObject.FindGameObjectsWithTag("Enemy").Length;
         }
 
-        if (playerHealth != null && playerHealthSlider != null)
+        if (baseHealth != null && baseHealthSlider != null)
         {
-            playerHealthSlider.value = playerHealth.CurrentHealth; // 👈 currentHealth'i public property yaptık
+            baseHealthSlider.value = (float)baseHealth.hp / baseHealth.maxHP;
         }
     }
 

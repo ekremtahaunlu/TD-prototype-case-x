@@ -1,37 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFollowPath : MonoBehaviour
 {
     public Transform[] waypoints;
     public float speed = 2f;
-    private int currentWP = 0;
+
+    private int currentWaypointIndex = 0;
 
     void Update()
     {
         if (waypoints == null || waypoints.Length == 0) return;
-        Transform target = waypoints[currentWP];
-        Vector3 dir = (target.position - transform.position);
-        Vector3 move = dir.normalized * speed * Time.deltaTime;
-        if (move.magnitude >= dir.magnitude)
+
+        Transform target = waypoints[currentWaypointIndex];
+        Vector3 dir = target.position - transform.position;
+        transform.position += dir.normalized * speed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, target.position) < 0.1f)
         {
-            transform.position = target.position;
-            currentWP++;
-            if (currentWP >= waypoints.Length)
+            currentWaypointIndex++;
+
+            if (currentWaypointIndex >= waypoints.Length)
             {
-                ReachEnd();
+                ReachDestination();
             }
-        }
-        else
-        {
-            transform.position += move;
         }
     }
 
-    void ReachEnd()
+    void ReachDestination()
     {
-        // Burada base hasarı, puan düşürme vs yapılabilir.
+        SimpleHealth baseHealth = FindObjectOfType<SimpleHealth>();
+        if (baseHealth != null)
+        {
+            baseHealth.TakeDamage(1);
+        }
+
         Destroy(gameObject);
     }
 }
