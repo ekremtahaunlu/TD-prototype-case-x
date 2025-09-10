@@ -85,8 +85,12 @@ public class PlayerController : MonoBehaviour
         {
             health.TakeDamage(attackDamage);
         }
-        if (attackSound != null) audioSource.PlayOneShot(attackSound);
-        if (attackVFX != null) Instantiate(attackVFX, target.position, Quaternion.identity);
+
+        if (attackSound != null && audioSource != null)
+            audioSource.PlayOneShot(attackSound);
+
+        if (attackVFX != null)
+            Instantiate(attackVFX, target.position, Quaternion.identity);
     }
 
     void OnDrawGizmosSelected()
