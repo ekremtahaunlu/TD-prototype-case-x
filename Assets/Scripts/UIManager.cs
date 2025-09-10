@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -9,26 +9,34 @@ public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
     private SimpleHealth playerHealth;
+
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
     public Slider playerHealthSlider;
+
     void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
         playerHealth = FindObjectOfType<PlayerController>().GetComponent<SimpleHealth>();
+
+        if (playerHealthSlider != null && playerHealth != null)
+        {
+            playerHealthSlider.maxValue = playerHealth.maxHealth;
+            playerHealthSlider.value = playerHealth.maxHealth;
+        }
     }
 
     void Update()
     {
-        if (waveManager != null)
+        if (waveManager != null && waveText != null && enemyCountText != null)
         {
             waveText.text = "Wave: " + (waveManager.CurrentWave + 1);
             enemyCountText.text = "Enemies: " + GameObject.FindGameObjectsWithTag("Enemy").Length;
         }
 
-        if (playerHealth != null)
+        if (playerHealth != null && playerHealthSlider != null)
         {
-            playerHealthSlider.value = playerHealth.hp / playerHealth.maxHP;
+            playerHealthSlider.value = playerHealth.CurrentHealth; // 👈 currentHealth'i public property yaptık
         }
     }
 
@@ -36,7 +44,7 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-    
+
     public void QuitGame()
     {
         Application.Quit();

@@ -134,9 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe6a0ed27efd1b4ba94f58816bfa44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  hp: 0
-  invincible: 0
-  iFrameDuration: 0.5
-  deathSound: {fileID: 8300000, guid: 8c1f675f6a6ceaf4f86649dfdeb77278, type: 3}
-  deathVFX: {fileID: 0}
+  maxHealth: 5
+  hitEffectPrefab: {fileID: 6525995698073518272, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}

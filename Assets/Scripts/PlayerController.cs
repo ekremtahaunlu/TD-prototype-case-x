@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = (camR * h + camF * v).normalized;
         if (dir.sqrMagnitude > 0.01f)
         {
-            // Yönlendirme (opsiyonel)
             transform.forward = Vector3.Lerp(transform.forward, dir, Time.deltaTime * 10f);
         }
 
