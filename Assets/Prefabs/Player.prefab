@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d920f8f88cd60284abebc79821e5500f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 3826643cdb1585c418ec4272aa876efa, type: 3}
   attackVFX: {fileID: 0}
   moveSpeed: 5
   attackRange: 3

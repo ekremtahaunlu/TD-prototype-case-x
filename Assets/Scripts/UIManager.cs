@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
     private SimpleHealth playerHealth;
-    public Text waveText;
-    public Text enemyCountText;
+    public TMP_Text waveText;
+    public TMP_Text enemyCountText;
     public Slider playerHealthSlider;
     void Start()
     {

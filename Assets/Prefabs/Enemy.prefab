@@ -138,5 +138,5 @@ MonoBehaviour:
   hp: 0
   invincible: 0
   iFrameDuration: 0.5
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 8c1f675f6a6ceaf4f86649dfdeb77278, type: 3}
   deathVFX: {fileID: 0}
