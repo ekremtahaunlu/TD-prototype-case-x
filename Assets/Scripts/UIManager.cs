@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    public SimpleHealth baseHealth;
+    private SimpleHealth baseHealth;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -16,11 +16,17 @@ public class UIManager : MonoBehaviour
     {
         waveManager = FindObjectOfType<WaveManager>();
         baseHealth = FindObjectOfType<SimpleHealth>();
+
+        if (baseHealthSlider != null && baseHealth != null)
+        {
+            baseHealthSlider.maxValue = baseHealth.maxHP;
+            baseHealthSlider.value = baseHealth.CurrentHP;
+        }
     }
 
     void Update()
     {
-        if (waveManager != null)
+        if (waveManager != null && waveText != null && enemyCountText != null)
         {
             waveText.text = "Wave: " + (waveManager.CurrentWave + 1);
             enemyCountText.text = "Enemies: " + GameObject.FindGameObjectsWithTag("Enemy").Length;
@@ -28,7 +34,7 @@ public class UIManager : MonoBehaviour
 
         if (baseHealth != null && baseHealthSlider != null)
         {
-            baseHealthSlider.value = (float)baseHealth.hp / baseHealth.maxHP;
+            baseHealthSlider.value = baseHealth.CurrentHP;
         }
     }
 

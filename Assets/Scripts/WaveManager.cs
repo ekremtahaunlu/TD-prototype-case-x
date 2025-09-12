@@ -1,60 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
-[System.Serializable]
-public class Wave
-{
-    public GameObject enemyPrefab;
-    public int count = 5;
-    public float spawnInterval = 0.5f;
-}
-
 public class WaveManager : MonoBehaviour
 {
-    public Wave[] waves;
+    [Header("Enemy Settings")]
+    public GameObject enemyPrefab;
     public Transform spawnPoint;
     public Transform[] pathWaypoints;
-    public KeyCode earlyNextWaveKey = KeyCode.E;
+
+    [Header("Wave Settings")]
+    public float timeBetweenSpawns = 1f;
+    public int enemiesPerWave = 5;
 
     private int currentWave = 0;
     public int CurrentWave => currentWave;
 
     void Start()
     {
-        StartCoroutine(WaveLoop());
+        StartCoroutine(SpawnWave());
     }
 
-    IEnumerator WaveLoop()
+    IEnumerator SpawnWave()
     {
-        while (currentWave < waves.Length)
+        for (int i = 0; i < enemiesPerWave; i++)
         {
-            Wave w = waves[currentWave];
+            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
-            for (int i = 0; i < w.count; i++)
+            EnemyFollowPath path = enemy.GetComponent<EnemyFollowPath>();
+            if (path != null)
             {
-                SpawnEnemy(w.enemyPrefab);
-                yield return new WaitForSeconds(w.spawnInterval);
+                path.SetWaypoints(pathWaypoints);
             }
 
-            while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
-            {
-                if (Input.GetKeyDown(earlyNextWaveKey)) break;
-                yield return null;
-            }
-
-            currentWave++;
-        }
-    }
-
-    void SpawnEnemy(GameObject prefab)
-    {
-        var go = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-        go.tag = "Enemy";
-
-        var ef = go.GetComponent<EnemyFollowPath>();
-        if (ef != null)
-        {
-            ef.waypoints = pathWaypoints;
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 }

@@ -1,38 +1,42 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyFollowPath : MonoBehaviour
 {
-    public Transform[] waypoints;
-    public float speed = 2f;
+    [SerializeField] private float speed = 2f;
+    private Transform[] waypoints;
+    private int waypointIndex = 0;
 
-    private int currentWaypointIndex = 0;
+    // WaveManager set edecek
+    public void SetWaypoints(Transform[] points)
+    {
+        waypoints = points;
+        waypointIndex = 0;
+        if (waypoints != null && waypoints.Length > 0)
+        {
+            transform.position = waypoints[0].position;
+        }
+    }
 
     void Update()
     {
         if (waypoints == null || waypoints.Length == 0) return;
 
-        Transform target = waypoints[currentWaypointIndex];
-        Vector3 dir = target.position - transform.position;
-        transform.position += dir.normalized * speed * Time.deltaTime;
+        Transform target = waypoints[waypointIndex];
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, target.position) < 0.1f)
         {
-            currentWaypointIndex++;
-
-            if (currentWaypointIndex >= waypoints.Length)
+            waypointIndex++;
+            if (waypointIndex >= waypoints.Length)
             {
-                ReachDestination();
+                ReachEnd();
             }
         }
     }
 
-    void ReachDestination()
+    void ReachEnd()
     {
-        SimpleHealth baseHealth = GameObject.FindWithTag("Base")?.GetComponent<SimpleHealth>();
-        if (baseHealth != null)
-        {
-            baseHealth.TakeDamage(1);
-        }
         Destroy(gameObject);
     }
 }

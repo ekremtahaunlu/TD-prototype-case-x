@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4226611097604171668}
-  - component: {fileID: 8023763451146697763}
   - component: {fileID: 6844772068368832674}
   - component: {fileID: 7590105705530571905}
   - component: {fileID: 7169932531082401212}
   - component: {fileID: 7419306707013610820}
   - component: {fileID: 8794780807720703687}
-  - component: {fileID: 4362780836636597538}
+  - component: {fileID: 7593683052624989997}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -38,14 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8023763451146697763
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2172043183678646641}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6844772068368832674
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -246,7 +237,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4362780836636597538
+--- !u!114 &7593683052624989997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,6 +246,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2172043183678646641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c33788265a78ab469e15b1f6d0fe09f, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf58610a750e5d4783adcbff3c9c156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 5
+  fireRate: 1
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}

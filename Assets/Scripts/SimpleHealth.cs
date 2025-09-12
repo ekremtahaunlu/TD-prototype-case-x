@@ -2,10 +2,12 @@
 
 public class SimpleHealth : MonoBehaviour
 {
-    public int maxHP;
-    public int hp { get; private set; }
+    public int maxHP = 3;
+    private int hp;
 
-    private void Start()
+    public int CurrentHP => hp;
+
+    void Start()
     {
         hp = maxHP;
     }
@@ -19,12 +21,8 @@ public class SimpleHealth : MonoBehaviour
         }
     }
 
-    private void Die()
+    void Die()
     {
         Destroy(gameObject);
-        if (tag == "Base")
-        {
-            Debug.Log("Base destroyed! Game Over!");
-        }
     }
 }

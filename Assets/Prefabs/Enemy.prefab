@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 431566240479381657}
-  - component: {fileID: 6779077766675992066}
-  - component: {fileID: 5594592420561183490}
   - component: {fileID: 57079506026969554}
   - component: {fileID: 66167608217750890}
   - component: {fileID: -1745729855911291311}
@@ -32,43 +30,13 @@ Transform:
   m_GameObject: {fileID: 3265087050904634348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2030591727120874644}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6779077766675992066
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265087050904634348}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &5594592420561183490
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265087050904634348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &57079506026969554
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -88,10 +56,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14456744
-  m_Height: 0.44
+  m_Radius: 0.1
+  m_Height: 0.31
   m_Direction: 1
-  m_Center: {x: 0, y: 0.41, z: 0.03}
+  m_Center: {x: -0.06, y: 0.42, z: 0}
 --- !u!82 &66167608217750890
 AudioSource:
   m_ObjectHideFlags: 0
@@ -112,7 +80,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.98509824
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -200,12 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6131516e4e0334189be88a59389ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 2
+  speed: 4
 --- !u!114 &9036319238434548547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +205,7 @@ GameObject:
   - component: {fileID: 2030591727120874644}
   - component: {fileID: 4427488185001605989}
   - component: {fileID: 7942745498835684371}
+  - component: {fileID: 8146899391966664419}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -258,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 8577533545143835664}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -305,7 +269,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2127461698910248042, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+  m_Sprite: {fileID: 2896272659956946786, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -328,3 +292,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c33788265a78ab469e15b1f6d0fe09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8146899391966664419
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8577533545143835664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 312496b25d842af4a938e96c7d5aaee0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
