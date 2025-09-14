@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    private SimpleHealth baseHealth;
+    private BaseHealth baseHealth;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -15,36 +14,20 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
-        baseHealth = FindObjectOfType<SimpleHealth>();
-
-        if (baseHealthSlider != null && baseHealth != null)
-        {
-            baseHealthSlider.maxValue = baseHealth.maxHP;
-            baseHealthSlider.value = baseHealth.CurrentHP;
-        }
+        baseHealth = FindObjectOfType<BaseHealth>();
     }
 
     void Update()
     {
-        if (waveManager != null && waveText != null && enemyCountText != null)
+        if (waveManager != null)
         {
-            waveText.text = "Wave: " + (waveManager.CurrentWave + 1);
-            enemyCountText.text = "Enemies: " + GameObject.FindGameObjectsWithTag("Enemy").Length;
+            waveText.text = "Wave: " + waveManager.CurrentWave;
+            enemyCountText.text = "Enemies: " + waveManager.EnemiesAlive;
         }
 
         if (baseHealth != null && baseHealthSlider != null)
         {
-            baseHealthSlider.value = baseHealth.CurrentHP;
+            baseHealthSlider.value = (float)baseHealth.CurrentHP / baseHealth.maxHP;
         }
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }

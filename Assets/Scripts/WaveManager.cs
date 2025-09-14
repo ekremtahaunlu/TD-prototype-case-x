@@ -3,83 +3,42 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Enemy Settings")]
-    public GameObject enemyPrefab;
-    public Transform spawnPoint;
-    public Transform[] pathWaypoints; // Inspector'da baðlayabilirsin
+    public static WaveManager Instance;
 
     [Header("Wave Settings")]
-    public float timeBetweenSpawns = 1f;
+    public GameObject enemyPrefab;
+    public Transform spawnPoint;
+    public Transform[] pathWaypoints;
+    public float timeBetweenSpawns = 0.5f;
+    public float timeBetweenWaves = 3f;
     public int enemiesPerWave = 5;
-    public float timeBetweenWaves = 2f;
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
+    private bool spawning = false;
+
     public int CurrentWave => currentWave;
+    public int EnemiesAlive => enemiesAlive;
 
-    void Start()
+    void Awake()
     {
-        // Eðer inspector'daki pathWaypoints boþsa sahnedeki "Waypoints" objesinden al
-        if (pathWaypoints == null || pathWaypoints.Length == 0)
-        {
-            var wpParent = GameObject.Find("Waypoints");
-            if (wpParent != null && wpParent.transform.childCount > 0)
-            {
-                int c = wpParent.transform.childCount;
-                pathWaypoints = new Transform[c];
-                for (int i = 0; i < c; i++) pathWaypoints[i] = wpParent.transform.GetChild(i);
-                Debug.Log($"[WaveManager] Auto-filled {c} waypoints from 'Waypoints' object.");
-            }
-            else
-            {
-                Debug.LogWarning("[WaveManager] pathWaypoints is empty and no 'Waypoints' GameObject found.");
-            }
-        }
-
-        StartCoroutine(SpawnWave());
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && enemiesAlive > 0)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            StopAllCoroutines();
-            StartCoroutine(NextWave());
-        }
-    }
-
-
-    IEnumerator SpawnWave()
-    {
-        currentWave++;
-        enemiesAlive = enemiesPerWave;
-
-        for (int i = 0; i < enemiesPerWave; i++)
-        {
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-
-            EnemyFollowPath path = enemy.GetComponent<EnemyFollowPath>();
-            if (path != null)
-            {
-                path.SetWaypoints(pathWaypoints);
-            }
-            else
-            {
-                Debug.LogError("[WaveManager] Spawned enemy has no EnemyFollowPath component!");
-            }
-
-            EnemyDeathNotifier notifier = enemy.AddComponent<EnemyDeathNotifier>();
-            notifier.onEnemyDestroyed = OnEnemyDestroyed;
-
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            TryStartNextWave();
         }
     }
 
     public void OnEnemyDestroyed()
     {
-        if (this == null) return;
         enemiesAlive--;
-        if (enemiesAlive <= 0)
+
+        if (enemiesAlive <= 0 && !spawning)
         {
             StartCoroutine(NextWave());
         }
@@ -88,18 +47,38 @@ public class WaveManager : MonoBehaviour
     IEnumerator NextWave()
     {
         yield return new WaitForSeconds(timeBetweenWaves);
+        TryStartNextWave();
+    }
+
+    void TryStartNextWave()
+    {
+        if (enemiesAlive > 0 || spawning) return;
+
         StartCoroutine(SpawnWave());
     }
-}
 
-public class EnemyDeathNotifier : MonoBehaviour
-{
-    public System.Action onEnemyDestroyed;
-    private void OnDestroy()
+    IEnumerator SpawnWave()
     {
-        if (onEnemyDestroyed != null)
+        spawning = true;
+        currentWave++;
+        enemiesAlive = enemiesPerWave;
+
+        Debug.Log($"[WaveManager] Wave {currentWave} starting with {enemiesPerWave} enemies");
+
+        for (int i = 0; i < enemiesPerWave; i++)
         {
-            onEnemyDestroyed.Invoke();
+            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+            EnemyFollowPath path = enemy.GetComponent<EnemyFollowPath>();
+            if (path != null)
+                path.SetWaypoints(pathWaypoints);
+
+            EnemyDeathNotifier notifier = enemy.AddComponent<EnemyDeathNotifier>();
+            notifier.onEnemyDestroyed = OnEnemyDestroyed;
+
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
+
+        spawning = false;
     }
 }
