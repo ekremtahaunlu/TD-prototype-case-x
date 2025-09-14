@@ -23,6 +23,12 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
+        WaveManager manager = FindObjectOfType<WaveManager>();
+        if (manager != null)
+        {
+            manager.OnEnemyDestroyed();
+        }
+
         Destroy(gameObject);
     }
 }

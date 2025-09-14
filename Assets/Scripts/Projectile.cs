@@ -29,7 +29,9 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
+
+        transform.Translate(Vector3.forward * distanceThisFrame, Space.Self);
     }
 
     void HitTarget()
@@ -39,6 +41,7 @@ public class Projectile : MonoBehaviour
         {
             hp.TakeDamage(damage);
         }
+
         Destroy(gameObject);
     }
 }
