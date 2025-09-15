@@ -4,8 +4,10 @@ public class EnemyDeathNotifier : MonoBehaviour
 {
     public System.Action onEnemyDestroyed;
 
-    void OnDestroy()
+    private void OnDestroy()
     {
+        if (!gameObject.scene.isLoaded) return;
+
         if (onEnemyDestroyed != null)
             onEnemyDestroyed.Invoke();
     }

@@ -3,22 +3,24 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public static WaveManager Instance;
-
-    [Header("Wave Settings")]
+    [Header("Enemy Settings")]
     public GameObject enemyPrefab;
     public Transform spawnPoint;
     public Transform[] pathWaypoints;
-    public float timeBetweenSpawns = 0.5f;
-    public float timeBetweenWaves = 3f;
+
+    [Header("Wave Settings")]
+    public float timeBetweenSpawns = 1f;
+    public float timeBetweenWaves = 2f;
     public int enemiesPerWave = 5;
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
-    private bool spawning = false;
+    private bool spawningWave = false;
 
     public int CurrentWave => currentWave;
     public int EnemiesAlive => enemiesAlive;
+
+    public static WaveManager Instance { get; private set; }
 
     void Awake()
     {
@@ -26,44 +28,36 @@ public class WaveManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (pathWaypoints == null || pathWaypoints.Length == 0)
         {
-            TryStartNextWave();
+            var wpParent = GameObject.Find("Waypoints");
+            if (wpParent != null && wpParent.transform.childCount > 0)
+            {
+                int c = wpParent.transform.childCount;
+                pathWaypoints = new Transform[c];
+                for (int i = 0; i < c; i++)
+                    pathWaypoints[i] = wpParent.transform.GetChild(i);
+            }
         }
-    }
-
-    public void OnEnemyDestroyed()
-    {
-        enemiesAlive--;
-
-        if (enemiesAlive <= 0 && !spawning)
-        {
-            StartCoroutine(NextWave());
-        }
-    }
-
-    IEnumerator NextWave()
-    {
-        yield return new WaitForSeconds(timeBetweenWaves);
-        TryStartNextWave();
-    }
-
-    void TryStartNextWave()
-    {
-        if (enemiesAlive > 0 || spawning) return;
 
         StartCoroutine(SpawnWave());
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !spawningWave && enemiesAlive <= 0)
+        {
+            StartCoroutine(SpawnWave());
+        }
+    }
+
     IEnumerator SpawnWave()
     {
-        spawning = true;
+        spawningWave = true;
         currentWave++;
         enemiesAlive = enemiesPerWave;
-
-        Debug.Log($"[WaveManager] Wave {currentWave} starting with {enemiesPerWave} enemies");
 
         for (int i = 0; i < enemiesPerWave; i++)
         {
@@ -79,6 +73,21 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
 
-        spawning = false;
+        spawningWave = false;
+    }
+
+    public void OnEnemyDestroyed()
+    {
+        enemiesAlive--;
+        if (enemiesAlive <= 0 && !spawningWave)
+        {
+            StartCoroutine(NextWave());
+        }
+    }
+
+    IEnumerator NextWave()
+    {
+        yield return new WaitForSeconds(timeBetweenWaves);
+        StartCoroutine(SpawnWave());
     }
 }
