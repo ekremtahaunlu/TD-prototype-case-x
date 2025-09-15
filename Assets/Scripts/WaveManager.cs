@@ -11,25 +11,27 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Settings")]
     public float timeBetweenSpawns = 1f;
     public float timeBetweenWaves = 2f;
-    public int enemiesPerWave = 5;
+    public int enemiesPerWave = 5; // ilk dalgadaki düþman sayýsý
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
     private bool spawningWave = false;
 
+    // UI için property’ler
     public int CurrentWave => currentWave;
     public int EnemiesAlive => enemiesAlive;
 
+    // Singleton istiyorsan:
     public static WaveManager Instance { get; private set; }
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        Instance = this;
     }
 
     void Start()
     {
+        // Waypoints boþsa sahneden otomatik doldur
         if (pathWaypoints == null || pathWaypoints.Length == 0)
         {
             var wpParent = GameObject.Find("Waypoints");
@@ -47,6 +49,7 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
+        // Elle yeni dalga için
         if (Input.GetKeyDown(KeyCode.E) && !spawningWave && enemiesAlive <= 0)
         {
             StartCoroutine(SpawnWave());
@@ -57,9 +60,13 @@ public class WaveManager : MonoBehaviour
     {
         spawningWave = true;
         currentWave++;
-        enemiesAlive = enemiesPerWave;
 
-        for (int i = 0; i < enemiesPerWave; i++)
+        // Dalga baþýna düþman sayýsýný dalga numarasýna göre belirle
+        int thisWaveEnemyCount = enemiesPerWave + (currentWave - 1) * 2;
+
+        enemiesAlive = thisWaveEnemyCount;
+
+        for (int i = 0; i < thisWaveEnemyCount; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
@@ -67,6 +74,7 @@ public class WaveManager : MonoBehaviour
             if (path != null)
                 path.SetWaypoints(pathWaypoints);
 
+            // Enemy öldüðünde WM'a bildir
             EnemyDeathNotifier notifier = enemy.AddComponent<EnemyDeathNotifier>();
             notifier.onEnemyDestroyed = OnEnemyDestroyed;
 

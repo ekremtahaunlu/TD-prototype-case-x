@@ -10,7 +10,6 @@ public class EnemyFollowPath : MonoBehaviour
     public void SetWaypoints(Transform[] points)
     {
         if (points == null || points.Length == 0) return;
-
         waypoints = points;
         waypointIndex = 0;
         target = waypoints[0];
@@ -42,9 +41,6 @@ public class EnemyFollowPath : MonoBehaviour
         {
             baseHealth.TakeDamage(1);
         }
-
-        if (WaveManager.Instance != null)
-            WaveManager.Instance.OnEnemyDestroyed();
 
         Destroy(gameObject);
     }

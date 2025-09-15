@@ -26,5 +26,7 @@ public class BaseHealth : MonoBehaviour
     void GameOver()
     {
         Debug.Log("[BaseHealth] GAME OVER! Base destroyed!");
+        UIManager ui = FindObjectOfType<UIManager>();
+        //if (ui != null) ui.ShowGameOver("Base destroyed");
     }
 }

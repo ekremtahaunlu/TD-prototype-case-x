@@ -11,18 +11,25 @@ public class UIManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public Slider baseHealthSlider;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+    public TMP_Text gameOverText;
+
     void Start()
     {
-        waveManager = FindObjectOfType<WaveManager>();
+        waveManager = WaveManager.Instance ?? FindObjectOfType<WaveManager>();
         baseHealth = FindObjectOfType<BaseHealth>();
+
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (baseHealthSlider != null) baseHealthSlider.maxValue = 1f;
     }
 
     void Update()
     {
         if (waveManager != null)
         {
-            waveText.text = "Wave: " + waveManager.CurrentWave;
-            enemyCountText.text = "Enemies: " + waveManager.EnemiesAlive;
+            waveText.text = $"Wave: {waveManager.CurrentWave}";
+            enemyCountText.text = $"Enemies: {waveManager.EnemiesAlive}";
         }
 
         if (baseHealth != null && baseHealthSlider != null)
@@ -30,4 +37,11 @@ public class UIManager : MonoBehaviour
             baseHealthSlider.value = (float)baseHealth.CurrentHP / baseHealth.maxHP;
         }
     }
+
+    //public void ShowGameOver(string reason = "Game Over")
+    //{
+        //if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        //if (gameOverText != null) gameOverText.text = reason;
+        //Time.timeScale = 0f;
+    //}
 }

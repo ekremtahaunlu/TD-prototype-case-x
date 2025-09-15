@@ -445,8 +445,8 @@ MonoBehaviour:
   - {fileID: 1424598472}
   - {fileID: 1265324543}
   timeBetweenSpawns: 1
+  timeBetweenWaves: 2
   enemiesPerWave: 5
-  timeBetweenWaves: 3
 --- !u!4 &494020387
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,6 +1108,8 @@ MonoBehaviour:
   waveText: {fileID: 1014671634}
   enemyCountText: {fileID: 1703430394}
   baseHealthSlider: {fileID: 269864856}
+  gameOverPanel: {fileID: 0}
+  gameOverText: {fileID: 0}
 --- !u!1 &1265324542
 GameObject:
   m_ObjectHideFlags: 0
