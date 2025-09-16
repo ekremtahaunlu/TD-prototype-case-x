@@ -11,17 +11,15 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Settings")]
     public float timeBetweenSpawns = 1f;
     public float timeBetweenWaves = 2f;
-    public int enemiesPerWave = 5; // ilk dalgadaki düþman sayýsý
+    public int enemiesPerWave = 5;
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
     private bool spawningWave = false;
 
-    // UI için property’ler
     public int CurrentWave => currentWave;
     public int EnemiesAlive => enemiesAlive;
 
-    // Singleton istiyorsan:
     public static WaveManager Instance { get; private set; }
 
     void Awake()
@@ -49,7 +47,6 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        // Elle yeni dalga için
         if (Input.GetKeyDown(KeyCode.E) && !spawningWave && enemiesAlive <= 0)
         {
             StartCoroutine(SpawnWave());
@@ -61,7 +58,6 @@ public class WaveManager : MonoBehaviour
         spawningWave = true;
         currentWave++;
 
-        // Dalga baþýna düþman sayýsýný dalga numarasýna göre belirle
         int thisWaveEnemyCount = enemiesPerWave + (currentWave - 1) * 2;
 
         enemiesAlive = thisWaveEnemyCount;
@@ -74,7 +70,6 @@ public class WaveManager : MonoBehaviour
             if (path != null)
                 path.SetWaypoints(pathWaypoints);
 
-            // Enemy öldüðünde WM'a bildir
             EnemyDeathNotifier notifier = enemy.AddComponent<EnemyDeathNotifier>();
             notifier.onEnemyDestroyed = OnEnemyDestroyed;
 

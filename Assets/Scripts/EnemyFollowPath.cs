@@ -36,7 +36,7 @@ public class EnemyFollowPath : MonoBehaviour
 
     void ReachEnd()
     {
-        BaseHealth baseHealth = FindObjectOfType<BaseHealth>();
+        SimpleHealth baseHealth = FindObjectOfType<SimpleHealth>();
         if (baseHealth != null)
         {
             baseHealth.TakeDamage(1);

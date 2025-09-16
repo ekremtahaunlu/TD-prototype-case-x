@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System;
 
 public class SimpleHealth : MonoBehaviour
 {
+    [Header("Health")]
     public int maxHP = 3;
     private int hp;
 
     public int CurrentHP => hp;
+
+    public Action onDeath;
 
     void Start()
     {
@@ -15,7 +19,11 @@ public class SimpleHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         hp -= amount;
-        if (hp <= 0)
+
+        if (hp < 0)
+            hp = 0;
+
+        if (hp == 0)
         {
             Die();
         }
@@ -23,6 +31,7 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        onDeath?.Invoke();
+        gameObject.SetActive(false);
     }
 }

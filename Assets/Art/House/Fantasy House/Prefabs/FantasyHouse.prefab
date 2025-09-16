@@ -862,7 +862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5520556933773855253}
-  - component: {fileID: 1102591666495041118}
+  - component: {fileID: 169583148255092660}
   m_Layer: 0
   m_Name: FantasyHouse
   m_TagString: Untagged
@@ -898,7 +898,7 @@ Transform:
   - {fileID: 3305037231081396835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1102591666495041118
+--- !u!114 &169583148255092660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,10 +907,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5176647960776757423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995a39ae8c1f4af478d7004ca284fb05, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e067a676da8b9740bb0ca4ffd264025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 5
 --- !u!1 &5499063424162202319
 GameObject:
   m_ObjectHideFlags: 0

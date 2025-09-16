@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    private BaseHealth baseHealth;
+    private SimpleHealth baseHealth; // Artık SimpleHealth
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         waveManager = WaveManager.Instance ?? FindObjectOfType<WaveManager>();
-        baseHealth = FindObjectOfType<BaseHealth>();
+        baseHealth = FindObjectOfType<SimpleHealth>(); // Artık SimpleHealth
 
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (baseHealthSlider != null) baseHealthSlider.maxValue = 1f;
@@ -38,10 +38,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //public void ShowGameOver(string reason = "Game Over")
-    //{
-        //if (gameOverPanel != null) gameOverPanel.SetActive(true);
-        //if (gameOverText != null) gameOverText.text = reason;
-        //Time.timeScale = 0f;
-    //}
+    public void ShowGameOver(string reason = "Game Over")
+    {
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        if (gameOverText != null) gameOverText.text = reason;
+        Time.timeScale = 0f;
+    }
 }
