@@ -17,6 +17,6 @@ public class BaseHealthHandler : MonoBehaviour
     void OnBaseDestroyed()
     {
         if (gameOverManager != null)
-            gameOverManager.GameOver("Base yok edildi!");
+            gameOverManager.GameOver("Base is destroyed!");
     }
 }

@@ -8,7 +8,11 @@ public class ExitTrigger : MonoBehaviour
     void Start()
     {
         if (baseHealth == null)
-            baseHealth = FindObjectOfType<SimpleHealth>();
+        {
+            BaseHealthHandler baseHandler = FindObjectOfType<BaseHealthHandler>();
+            if (baseHandler != null) baseHealth = baseHandler.health;
+            if (baseHealth == null) baseHealth = FindObjectOfType<SimpleHealth>();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

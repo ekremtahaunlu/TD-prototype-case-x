@@ -30,7 +30,6 @@ public class Projectile : MonoBehaviour
         }
 
         transform.LookAt(target);
-
         transform.Translate(Vector3.forward * distanceThisFrame, Space.Self);
     }
 
