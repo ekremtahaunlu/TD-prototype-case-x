@@ -3,8 +3,7 @@ using System;
 
 public class SimpleHealth : MonoBehaviour
 {
-    [Header("Health")]
-    public int maxHP = 3;
+    public int maxHP = 10;
     private int hp;
 
     public int CurrentHP => hp;
@@ -19,19 +18,21 @@ public class SimpleHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         hp -= amount;
-
-        if (hp < 0)
-            hp = 0;
-
-        if (hp == 0)
+        if (hp <= 0)
         {
+            hp = 0;
             Die();
         }
     }
 
     void Die()
     {
-        onDeath?.Invoke();
-        gameObject.SetActive(false);
+        if (onDeath != null)
+            onDeath.Invoke();
+
+        if (CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

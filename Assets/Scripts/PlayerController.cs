@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameOverManager gameOverManager;
     public SimpleHealth health;
 
-    float attackCooldown = 0f;
+    private float attackCooldown = 0f;
 
     void Start()
     {
@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // --- Hareket ---
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 move = new Vector3(h, 0f, v).normalized;
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
             transform.forward = move;
 
-        // --- Yakýn dövüþ ---
         attackCooldown -= Time.deltaTime;
         if (attackCooldown <= 0f)
         {
@@ -79,9 +77,7 @@ public class PlayerController : MonoBehaviour
     void OnDeath()
     {
         if (gameOverManager != null)
-            gameOverManager.GameOver();
-
-        gameObject.SetActive(false);
+            gameOverManager.GameOver("Player Ã¶ldÃ¼");
     }
 
     void OnDrawGizmosSelected()
