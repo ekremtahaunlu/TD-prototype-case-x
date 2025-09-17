@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // WASD hareketi
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(h, 0f, v).normalized;
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
             transform.forward = move;
 
-        // Yakın dövüş otomatik saldırı
         attackCooldown -= Time.deltaTime;
         if (attackCooldown <= 0f)
         {
