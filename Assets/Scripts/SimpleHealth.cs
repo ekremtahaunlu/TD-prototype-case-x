@@ -31,7 +31,7 @@ public class SimpleHealth : MonoBehaviour
     {
         if (dieClip != null)
         {
-            AudioSource.PlayClipAtPoint(dieClip, transform.position, 1.0f);
+            AudioSource.PlayClipAtPoint(dieClip, transform.position);
         }
         
         if (onDeath != null)
