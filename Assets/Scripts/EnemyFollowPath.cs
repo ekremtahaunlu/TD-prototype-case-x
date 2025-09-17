@@ -2,7 +2,9 @@
 
 public class EnemyFollowPath : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;
+    [Header("Movement")]
+    public float speed = 2f;  // WaveManager buradan ayarlayacak
+
     private Transform[] waypoints;
     private int waypointIndex = 0;
     private Transform target;
@@ -36,7 +38,6 @@ public class EnemyFollowPath : MonoBehaviour
 
     void ReachEnd()
     {
-
         BaseHealthHandler baseHandler = FindObjectOfType<BaseHealthHandler>();
         if (baseHandler != null && baseHandler.health != null)
         {

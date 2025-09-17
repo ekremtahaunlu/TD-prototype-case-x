@@ -29,7 +29,6 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        // Waypoints boþsa sahneden otomatik doldur
         if (pathWaypoints == null || pathWaypoints.Length == 0)
         {
             var wpParent = GameObject.Find("Waypoints");
@@ -47,8 +46,10 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !spawningWave && enemiesAlive <= 0)
+        // Artýk enemiesAlive þartý yok, E'ye basýnca dalga geliyor
+        if (Input.GetKeyDown(KeyCode.E) && !spawningWave)
         {
+            StopAllCoroutines();
             StartCoroutine(SpawnWave());
         }
     }
@@ -58,9 +59,10 @@ public class WaveManager : MonoBehaviour
         spawningWave = true;
         currentWave++;
 
-        int thisWaveEnemyCount = enemiesPerWave + (currentWave - 1) * 2;
+        int thisWaveEnemyCount = enemiesPerWave; // istersen dalgaya göre arttýrabilirsin
 
-        enemiesAlive = thisWaveEnemyCount;
+        // hâlâ sahnede düþman varsa yeni gelenleri de ekle
+        enemiesAlive += thisWaveEnemyCount;
 
         for (int i = 0; i < thisWaveEnemyCount; i++)
         {
@@ -68,7 +70,26 @@ public class WaveManager : MonoBehaviour
 
             EnemyFollowPath path = enemy.GetComponent<EnemyFollowPath>();
             if (path != null)
+            {
                 path.SetWaypoints(pathWaypoints);
+                // wave’e göre hýz
+                float newSpeed = 2f + (currentWave - 1) * 0.5f;
+                path.speed = newSpeed;
+            }
+
+            // wave’e göre can
+            SimpleHealth hp = enemy.GetComponent<SimpleHealth>();
+            if (hp != null)
+            {
+                hp.maxHP = 5 + (currentWave - 1) * 2;
+            }
+
+            // wave’e göre renk
+            Renderer rend = enemy.GetComponentInChildren<Renderer>();
+            if (rend != null)
+            {
+                rend.material.color = GetColorForWave(currentWave);
+            }
 
             EnemyDeathNotifier notifier = enemy.AddComponent<EnemyDeathNotifier>();
             notifier.onEnemyDestroyed = OnEnemyDestroyed;
@@ -82,6 +103,7 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyDestroyed()
     {
         enemiesAlive--;
+        // otomatik sonraki dalga gelsin istiyorsan buraya logic ekle
         if (enemiesAlive <= 0 && !spawningWave)
         {
             StartCoroutine(NextWave());
@@ -92,5 +114,17 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(SpawnWave());
+    }
+
+    Color GetColorForWave(int wave)
+    {
+        switch (wave % 5)
+        {
+            case 1: return Color.green;
+            case 2: return Color.yellow;
+            case 3: return Color.red;
+            case 4: return Color.magenta;
+            default: return Color.white;
+        }
     }
 }
