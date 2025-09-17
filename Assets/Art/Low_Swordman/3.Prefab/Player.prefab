@@ -216,7 +216,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290715225530138}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6bda1f5bf4224db44b12251ff5bfe8cb, type: 2}
   m_CullingMode: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   attackRange: 5
-  attackRate: 1
+  attackRate: 2
   attackDamage: 1
   gameOverManager: {fileID: 0}
   health: {fileID: 5582471304671682148}
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
+  dieClip: {fileID: 0}
 --- !u!54 &3058953976297188889
 Rigidbody:
   m_ObjectHideFlags: 0

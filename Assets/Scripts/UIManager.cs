@@ -42,12 +42,9 @@ public class UIManager : MonoBehaviour
         {
             baseHealthSlider.maxValue = baseHealth.maxHP;
             baseHealthSlider.value = baseHealth.CurrentHP;
-            
-            Debug.Log($"Health Slider kuruldu - Max: {baseHealth.maxHP}, Current: {baseHealth.CurrentHP}");
         }
         else
         {
-            Debug.LogWarning("BaseHealth veya BaseHealthSlider bulunamadı!");
             if (baseHealth == null) Debug.LogWarning("BaseHealth null!");
             if (baseHealthSlider == null) Debug.LogWarning("BaseHealthSlider null!");
         }

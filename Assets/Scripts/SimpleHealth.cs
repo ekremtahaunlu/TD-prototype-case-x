@@ -8,6 +8,8 @@ public class SimpleHealth : MonoBehaviour
 
     public int CurrentHP => hp;
 
+    public AudioClip dieClip;
+
     public Action onDeath;
 
     void Start()
@@ -27,6 +29,11 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
+        if (dieClip != null)
+        {
+            AudioSource.PlayClipAtPoint(dieClip, transform.position, 1.0f);
+        }
+        
         if (onDeath != null)
             onDeath.Invoke();
 
