@@ -18,8 +18,10 @@ public class PlayerController : MonoBehaviour
     public GameOverManager gameOverManager;
     public SimpleHealth health;
 
-    private float attackCooldown = 0f;
+    [Header("Effects")]
+    public GameObject hitEffect;
 
+    private float attackCooldown = 0f;
     private Animator animator;
 
     void Start()
@@ -96,6 +98,12 @@ public class PlayerController : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(attackDamage);
+        }
+
+        if (hitEffect != null)
+        {
+            GameObject fx = Instantiate(hitEffect, enemy.transform.position, Quaternion.identity);
+            Destroy(fx, 1f);
         }
     }
 

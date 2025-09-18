@@ -250,6 +250,7 @@ MonoBehaviour:
   audioSource: {fileID: 4432962024040790856}
   gameOverManager: {fileID: 0}
   health: {fileID: 5582471304671682148}
+  hitEffect: {fileID: 6525995698073518272, guid: 1e59d376101f65443b938cab7d6edbfe, type: 3}
 --- !u!114 &5582471304671682148
 MonoBehaviour:
   m_ObjectHideFlags: 0
