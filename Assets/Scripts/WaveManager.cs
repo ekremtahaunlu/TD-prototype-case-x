@@ -70,19 +70,16 @@ public class WaveManager : MonoBehaviour
             if (path != null)
             {
                 path.SetWaypoints(pathWaypoints);
-                // wave’e göre hýz
                 float newSpeed = 2f + (currentWave - 1) * 0.5f;
                 path.speed = newSpeed;
             }
 
-            // wave’e göre can
             SimpleHealth hp = enemy.GetComponent<SimpleHealth>();
             if (hp != null)
             {
                 hp.maxHP = 5 + (currentWave - 1) * 2;
             }
 
-            // wave’e göre renk
             Renderer rend = enemy.GetComponentInChildren<Renderer>();
             if (rend != null)
             {
