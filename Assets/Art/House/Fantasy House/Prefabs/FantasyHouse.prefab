@@ -864,7 +864,6 @@ GameObject:
   - component: {fileID: 5520556933773855253}
   - component: {fileID: 169583148255092660}
   - component: {fileID: 1808750228398676913}
-  - component: {fileID: 8074092998234515023}
   m_Layer: 0
   m_Name: FantasyHouse
   m_TagString: Untagged
@@ -913,6 +912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  dieClip: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &1808750228398676913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,21 +926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085bda358aa5176479911c7b64fbb880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 8074092998234515023}
+  health: {fileID: 169583148255092660}
   gameOverManager: {fileID: 0}
---- !u!114 &8074092998234515023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176647960776757423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e067a676da8b9740bb0ca4ffd264025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 10
 --- !u!1 &5499063424162202319
 GameObject:
   m_ObjectHideFlags: 0

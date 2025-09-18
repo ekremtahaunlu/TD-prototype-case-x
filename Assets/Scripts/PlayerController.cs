@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public float attackRate = 1f;
     public int attackDamage = 1;
 
+    [Header("Audio")]
+    public AudioClip attackClip;
+    public AudioSource audioSource;
+
     [Header("References")]
     public GameOverManager gameOverManager;
     public SimpleHealth health;
@@ -23,6 +27,9 @@ public class PlayerController : MonoBehaviour
 
         if (health != null)
             health.onDeath += OnDeath;
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -67,6 +74,11 @@ public class PlayerController : MonoBehaviour
 
     void Attack(GameObject enemy)
     {
+        if (attackClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(attackClip);
+        }
+
         SimpleHealth enemyHealth = enemy.GetComponent<SimpleHealth>();
         if (enemyHealth != null)
         {
@@ -77,7 +89,7 @@ public class PlayerController : MonoBehaviour
     void OnDeath()
     {
         if (gameOverManager != null)
-            gameOverManager.GameOver("Player öldü");
+            gameOverManager.GameOver("Game Over!");
     }
 
     void OnDrawGizmosSelected()

@@ -6,7 +6,6 @@ public class GameOverManager : MonoBehaviour
     [Header("UI")]
     public GameObject gameOverPanel;
     public TMP_Text gameOverText;
-
     private bool isGameOver = false;
 
     public void GameOver(string reason = "Game Over")

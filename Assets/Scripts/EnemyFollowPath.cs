@@ -3,7 +3,7 @@
 public class EnemyFollowPath : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed = 2f;  // WaveManager buradan ayarlayacak
+    public float speed = 2f;
 
     private Transform[] waypoints;
     private int waypointIndex = 0;

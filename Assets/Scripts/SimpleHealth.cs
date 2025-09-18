@@ -7,14 +7,18 @@ public class SimpleHealth : MonoBehaviour
     private int hp;
 
     public int CurrentHP => hp;
-
-    public AudioClip dieClip;
-
     public Action onDeath;
+
+    [Header("Audio")]
+    public AudioClip dieClip;
+    public AudioSource audioSource;
 
     void Start()
     {
         hp = maxHP;
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int amount)
@@ -29,17 +33,24 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
-        if (dieClip != null)
-        {
-            AudioSource.PlayClipAtPoint(dieClip, transform.position);
-        }
-        
         if (onDeath != null)
             onDeath.Invoke();
 
         if (CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            if (dieClip != null)
+            {
+                if (audioSource != null)
+                {
+                    audioSource.PlayOneShot(dieClip);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(dieClip, transform.position);
+                }
+            }
+
+            Destroy(gameObject, 0.1f);
         }
     }
 }

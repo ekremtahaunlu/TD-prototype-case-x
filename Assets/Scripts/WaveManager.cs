@@ -46,7 +46,6 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        // Artýk enemiesAlive þartý yok, E'ye basýnca dalga geliyor
         if (Input.GetKeyDown(KeyCode.E) && !spawningWave)
         {
             StopAllCoroutines();
@@ -59,9 +58,8 @@ public class WaveManager : MonoBehaviour
         spawningWave = true;
         currentWave++;
 
-        int thisWaveEnemyCount = enemiesPerWave; // istersen dalgaya göre arttýrabilirsin
+        int thisWaveEnemyCount = enemiesPerWave;
 
-        // hâlâ sahnede düþman varsa yeni gelenleri de ekle
         enemiesAlive += thisWaveEnemyCount;
 
         for (int i = 0; i < thisWaveEnemyCount; i++)
@@ -103,7 +101,7 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyDestroyed()
     {
         enemiesAlive--;
-        // otomatik sonraki dalga gelsin istiyorsan buraya logic ekle
+
         if (enemiesAlive <= 0 && !spawningWave)
         {
             StartCoroutine(NextWave());
