@@ -22,6 +22,13 @@ public class GameOverManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+
+        MusicManager mm = FindObjectOfType<MusicManager>();
+        if (mm != null)
+        {
+            Destroy(mm.gameObject);
+        }
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
