@@ -11,8 +11,10 @@ Bu proje Unity kullanılarak geliştirilmiş bir **base defense / tower defense*
 
 ## 🎮 Özellikler
 - Dalgalar halinde düşman spawn edilmesi
-- Dalga sayısı arttıkça düşmanların **renk, hız ve can değerlerinin** artması
+- Dalga sayısı arttıkça düşmanların **renk, hız ve can değerlerinin** değişmesi
+- Düşmana atak yapılınca ses çıkması ve vfx, partikül efekti olması
 - Düşman öldüğünde **“die”** sesi çalması
+- Başlangıç menüsü olması ve müzik çalması **(kendim besteledim)**
 - Oyun başladığında **arkaplan müziği** çalması
 - Oyuncunun üssü zarar gördüğünde slider üzerinden can durumunun güncellenmesi
 - `E` tuşuna basarak **bir sonraki dalgayı erken başlatabilme**
@@ -23,7 +25,7 @@ Bu proje Unity kullanılarak geliştirilmiş bir **base defense / tower defense*
 - **Enemy prefab**’ı içinde:
   - `EnemyFollowPath` bileşeni (waypoint takibi)
   - `SimpleHealth` bileşeni (can sistemi)
-  - `AudioSource` + “die” sesi atanmış durumda
+  - `AudioSource` + “die” ve "attack" sesi atanmış durumda
 - **Player / Base**:
   - `SimpleHealth` bileşeni üssün canını tutuyor.
   - UIManager’da bu can slider’a bağlanıyor.
@@ -33,4 +35,5 @@ Bu proje Unity kullanılarak geliştirilmiş bir **base defense / tower defense*
 - **Audio**:
   - Arkaplan müziği sahnede “AudioManager” veya boş bir GameObject’teki `AudioSource` üzerinden loop edilerek çalınır.
   - `E` tuşu bir sonraki dalgayı erken başlatır (WaveManager scripti üzerinden).
+- **Scripts**
   - Tüm scriptler (UIManager, WaveManager, EnemyFollowPath, SimpleHealth, vb.) **Scripts** klasörü altında düzenlenmiştir.
