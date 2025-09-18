@@ -20,8 +20,12 @@ public class PlayerController : MonoBehaviour
 
     private float attackCooldown = 0f;
 
+    private Animator animator;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         if (health == null)
             health = GetComponent<SimpleHealth>();
 
@@ -41,6 +45,12 @@ public class PlayerController : MonoBehaviour
 
         if (move != Vector3.zero)
             transform.forward = move;
+
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", move.magnitude);
+            animator.SetBool("IsMoving", move.magnitude > 0.01f);
+        }
 
         attackCooldown -= Time.deltaTime;
         if (attackCooldown <= 0f)
@@ -74,6 +84,9 @@ public class PlayerController : MonoBehaviour
 
     void Attack(GameObject enemy)
     {
+        if (animator != null)
+            animator.SetTrigger("Attack");
+
         if (attackClip != null && audioSource != null)
         {
             audioSource.PlayOneShot(attackClip);
@@ -88,6 +101,9 @@ public class PlayerController : MonoBehaviour
 
     void OnDeath()
     {
+        if (animator != null)
+            animator.SetTrigger("Die");
+
         if (gameOverManager != null)
             gameOverManager.GameOver("Game Over!");
     }
