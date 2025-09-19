@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
     {
         if (baseHealth != null && baseHealthSlider != null)
         {
-            baseHealthSlider.maxValue = baseHealth.maxHP;
+            baseHealthSlider.maxValue = baseHealth.MaxHP;
             baseHealthSlider.value = baseHealth.CurrentHP;
         }
         else

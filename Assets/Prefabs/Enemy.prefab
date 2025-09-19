@@ -103,6 +103,7 @@ MonoBehaviour:
   maxHP: 5
   dieClip: {fileID: 8300000, guid: 8c1f675f6a6ceaf4f86649dfdeb77278, type: 3}
   audioSource: {fileID: -249816629022225872}
+  healthBarPrefab: {fileID: 3905214141071443143, guid: f792ef8a4e483dd4eb1baa67359ccd75, type: 3}
 --- !u!114 &9093043734382114537
 MonoBehaviour:
   m_ObjectHideFlags: 0

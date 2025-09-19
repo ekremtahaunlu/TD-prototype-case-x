@@ -3,7 +3,7 @@ using System;
 
 public class SimpleHealth : MonoBehaviour
 {
-    public int maxHP = 10;
+    [SerializeField] public int maxHP = 10;
     private int hp;
 
     public int CurrentHP => hp;
@@ -13,10 +13,18 @@ public class SimpleHealth : MonoBehaviour
     public AudioClip dieClip;
     public AudioSource audioSource;
 
+    public int MaxHP
+    {
+        get => maxHP;
+        set
+        {
+            maxHP = value;
+            hp = maxHP;
+        }
+    }
+
     void Start()
     {
-        hp = maxHP;
-
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
     }
@@ -33,21 +41,16 @@ public class SimpleHealth : MonoBehaviour
 
     void Die()
     {
-        if (onDeath != null)
-            onDeath.Invoke();
+        onDeath?.Invoke();
 
         if (CompareTag("Enemy"))
         {
             if (dieClip != null)
             {
                 if (audioSource != null)
-                {
                     audioSource.PlayOneShot(dieClip);
-                }
                 else
-                {
                     AudioSource.PlayClipAtPoint(dieClip, transform.position);
-                }
             }
 
             Destroy(gameObject, 0.1f);

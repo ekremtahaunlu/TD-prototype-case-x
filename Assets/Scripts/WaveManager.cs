@@ -58,9 +58,10 @@ public class WaveManager : MonoBehaviour
         spawningWave = true;
         currentWave++;
 
-        int thisWaveEnemyCount = enemiesPerWave;
-
+        int thisWaveEnemyCount = Mathf.RoundToInt(enemiesPerWave * Mathf.Pow(1.5f, currentWave - 1));
         enemiesAlive += thisWaveEnemyCount;
+
+        int waveHP = 2 + (currentWave - 1) * 3;
 
         for (int i = 0; i < thisWaveEnemyCount; i++)
         {
@@ -77,7 +78,7 @@ public class WaveManager : MonoBehaviour
             SimpleHealth hp = enemy.GetComponent<SimpleHealth>();
             if (hp != null)
             {
-                hp.maxHP = 5 + (currentWave - 1) * 2;
+                hp.MaxHP = waveHP;
             }
 
             Renderer rend = enemy.GetComponentInChildren<Renderer>();
@@ -94,6 +95,7 @@ public class WaveManager : MonoBehaviour
 
         spawningWave = false;
     }
+
 
     public void OnEnemyDestroyed()
     {
