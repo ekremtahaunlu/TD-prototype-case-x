@@ -861,7 +861,6 @@ MonoBehaviour:
   maxHP: 5
   dieClip: {fileID: 8300000, guid: 8c1f675f6a6ceaf4f86649dfdeb77278, type: 3}
   audioSource: {fileID: 477972055}
-  healthBarPrefab: {fileID: 0}
 --- !u!212 &477972057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2580,10 +2579,6 @@ PrefabInstance:
     - target: {fileID: 4210157123753652, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582471304671682148, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
-      propertyPath: healthBarPrefab
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7660722803527420777, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
       propertyPath: gameOverManager

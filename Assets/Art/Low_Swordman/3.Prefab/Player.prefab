@@ -266,7 +266,6 @@ MonoBehaviour:
   maxHP: 10
   dieClip: {fileID: 8300000, guid: 8c1f675f6a6ceaf4f86649dfdeb77278, type: 3}
   audioSource: {fileID: 0}
-  healthBarPrefab: {fileID: 0}
 --- !u!54 &3058953976297188889
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private WaveManager waveManager;
-    private SimpleHealth baseHealth;
-    private BaseHealthHandler baseHealthHandler;
+    private SimpleHealth baseHealth; // Base’in SimpleHealth bileşeni
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -18,57 +17,32 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        // WaveManager ve BaseHealth referanslarını bul
         waveManager = WaveManager.Instance ?? FindObjectOfType<WaveManager>();
-        
-        baseHealthHandler = FindObjectOfType<BaseHealthHandler>();
-        if (baseHealthHandler != null && baseHealthHandler.health != null)
-        {
-            baseHealth = baseHealthHandler.health;
-        }
-        else
-        {
-            baseHealth = FindObjectOfType<SimpleHealth>();
-        }
+        baseHealth = FindObjectOfType<SimpleHealth>();
 
-        if (gameOverPanel != null) 
+        // Game Over paneli kapalı başlasın
+        if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
-        SetupHealthSlider();
-    }
-
-    void SetupHealthSlider()
-    {
+        // Slider ayarlarını yap
         if (baseHealth != null && baseHealthSlider != null)
         {
-            baseHealthSlider.maxValue = baseHealth.MaxHP;
+            baseHealthSlider.maxValue = baseHealth.maxHP;
             baseHealthSlider.value = baseHealth.CurrentHP;
-        }
-        else
-        {
-            if (baseHealth == null) Debug.LogWarning("BaseHealth null!");
-            if (baseHealthSlider == null) Debug.LogWarning("BaseHealthSlider null!");
         }
     }
 
     void Update()
     {
-        UpdateWaveInfo();
-        UpdateHealthSlider();
-    }
-
-    void UpdateWaveInfo()
-    {
+        // Wave ve düşman sayısı
         if (waveManager != null)
         {
-            if (waveText != null)
-                waveText.text = $"Wave: {waveManager.CurrentWave}";
-            if (enemyCountText != null)
-                enemyCountText.text = $"Enemies: {waveManager.EnemiesAlive}";
+            waveText.text = $"Wave: {waveManager.CurrentWave}";
+            enemyCountText.text = $"Enemies: {waveManager.EnemiesAlive}";
         }
-    }
 
-    void UpdateHealthSlider()
-    {
+        // Base HP slider
         if (baseHealth != null && baseHealthSlider != null)
         {
             baseHealthSlider.value = baseHealth.CurrentHP;
